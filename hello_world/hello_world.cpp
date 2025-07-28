@@ -7,7 +7,7 @@ int main() {
     auto now = std::chrono::system_clock::now();
     std::time_t t = std::chrono::system_clock::to_time_t(now);
     std::tm* tm_ptr = std::localtime(&t);
-    int year = tm_ptr->tm_year + 1900;
+    int year = tm_ptr->tm_year + 1900; // tm_year is years since 1900 :O
 
     constexpr size_t buffer_size = 5;
     char buffer[buffer_size];
