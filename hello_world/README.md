@@ -1,3 +1,9 @@
 # Hello World
 
-Should be simple enough for you to understand
+## How to build
+
+Run the build file:
+
+```
+./build.sh
+```
