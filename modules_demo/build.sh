@@ -6,3 +6,4 @@ mkdir "$SOURCE_DIR/build"
 cd "$SOURCE_DIR/build"
 cmake -G Ninja "$SOURCE_DIR"
 ninja
+"$SOURCE_DIR/run.sh"
