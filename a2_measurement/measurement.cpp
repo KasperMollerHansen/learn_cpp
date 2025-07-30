@@ -1,35 +1,9 @@
 #include <algorithm>
-#include <chrono>
-#include <iostream>
+import measurement_utils;
 #include <random>
-#include <string>
 #include <vector>
-#include <sstream>
-#include <locale>
-
-using Clock = std::chrono::high_resolution_clock;
-
-std::string format_with_dots(size_t n) {
-    std::string s = std::to_string(n);
-    std::string result;
-    int count = 0;
-    for (auto it = s.rbegin(); it != s.rend(); ++it) {
-        if (count && count % 3 == 0)
-            result.insert(0, 1, '.');
-        result.insert(0, 1, *it);
-        ++count;
-    }
-    return result;
-}
-
-template<typename F>
-void benchmark(const std::string& name, F&& f) {
-    auto start = Clock::now();
-    f();
-    auto end = Clock::now();
-    std::chrono::duration<double, std::milli> ms = end - start;
-    std::cout << name << ": " << ms.count() << " ms\n";
-}
+#include <string>
+#include <iostream>
 
 template<typename Container, typename ValueOrPredicate>
 void run_find_case(Container& v, size_t idx, const std::string& name_found, const std::string& name_not_found, ValueOrPredicate finder, bool is_predicate = false, typename Container::value_type found_value = {}) {

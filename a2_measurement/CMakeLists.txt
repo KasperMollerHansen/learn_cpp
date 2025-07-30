@@ -5,7 +5,7 @@ set(CMAKE_CXX_COMPILER "clang++-18" CACHE STRING "" FORCE)
 get_filename_component(PROJECT_NAME "${CMAKE_SOURCE_DIR}" NAME)
 project(${PROJECT_NAME} LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_SCAN_FOR_MODULES ON)
 
 # Set output directory for executables
