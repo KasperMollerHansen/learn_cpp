@@ -18,7 +18,7 @@ int main() {
     std::vector<int> vi_small(N_small, kDefaultValue); 
 
     // --- std::find on vector<int>
-    // Case 1 & 2: Find 7 in the middle
+    // Case 1 & 2: Find 7 in the middle and not found
     std::cout << "\nRunning find benchmarks...\n";
     run_find_case(vi, N/2, "std::find int (found middle)", "std::find int (not found)",
         [](auto begin, auto end) { return std::find(begin, end, 7); }, 7);
@@ -26,7 +26,7 @@ int main() {
         [](auto begin, auto end) { return std::find(begin, end, 7); }, 7);
 
     // --- std::find_if on vector<int>
-    // Case 3 & 4: Find x < 7 in middle
+    // Case 3 & 4: Find x < 7 in middle and not found
     std::cout << "\nRunning find_if benchmarks...\n";
     run_find_case(vi, N/2, "std::find_if int (found middle)", "std::find_if int (not found)",
         [](auto begin, auto end) { return std::find_if(begin, end, [](int x){ return x < 7; }); }, 5);
