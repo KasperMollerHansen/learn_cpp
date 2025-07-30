@@ -31,6 +31,31 @@ void benchmark(const std::string& name, F&& f) {
     std::cout << name << ": " << ms.count() << " ms\n";
 }
 
+template<typename Container, typename ValueOrPredicate>
+void run_find_case(Container& v, size_t idx, const std::string& name_found, const std::string& name_not_found, ValueOrPredicate finder, bool is_predicate = false, typename Container::value_type found_value = {}) {
+    // Case: value/predicate matches in the middle
+    if (!is_predicate) v[idx] = found_value;
+    else v[idx] = found_value; // For predicate, set value that matches predicate
+
+    benchmark(name_found, [&] {
+        auto it = finder(v.begin(), v.end());
+        if (it != v.end())
+            std::cout << "Found at index " << std::distance(v.begin(), it) << "\n";
+        else
+            std::cout << "Not found\n";
+    });
+    v[idx] = 42; // Reset
+
+    // Case: value/predicate does not match
+    benchmark(name_not_found, [&] {
+        auto it = finder(v.begin(), v.end());
+        if (it != v.end())
+            std::cout << "Found at index " << std::distance(v.begin(), it) << "\n";
+        else
+            std::cout << "Not found\n";
+    });
+}
+
 int main() {
     const size_t N = 1'000'000'000; // Very large vector for performance testing
     const size_t N_small = 1'000'000; // Smaller vector for quick tests
@@ -40,44 +65,18 @@ int main() {
     std::vector<int> vi_small(N_small, 42); // Smaller vector for quick tests
 
     // --- std::find on vector<int>
-    // Case 1: Find 7 in the middle
-    auto run_find_middle = [](std::vector<int>& v, size_t idx, const std::string& name) {
-        v[idx] = 7;
-        benchmark(name, [&] {
-            auto it = std::find(v.begin(), v.end(), 7);
-        });
-        v[idx] = 42; // Reset
-    };
-    run_find_middle(vi, N/2, "std::find int (found middle)");
-    run_find_middle(vi_small, N_small/2, "std::find int (found middle small)");
-
-    // Case 2: Find 7 not present
-    benchmark("std::find int (not found)", [&] {
-        auto it = std::find(vi.begin(), vi.end(), 7);
-    });
-    benchmark("std::find int (not found small)", [&] {
-        auto it = std::find(vi_small.begin(), vi_small.end(), 7);
-    });
+    // Case 1 & 2: Find 7 in the middle
+    run_find_case(vi, N/2, "std::find int (found middle)", "std::find int (not found)",
+        [](auto begin, auto end) { return std::find(begin, end, 7); }, false, 7);
+    run_find_case(vi_small, N_small/2, "std::find int (found middle small)", "std::find int (not found small)",
+        [](auto begin, auto end) { return std::find(begin, end, 7); }, false, 7);
 
     // --- std::find_if on vector<int>
-    // Case 3: Find x < 7 in middle
-    auto run_find_if_middle = [](std::vector<int>& v, size_t idx, const std::string& name) {
-        v[idx] = 5;
-        benchmark(name, [&] {
-            auto it = std::find_if(v.begin(), v.end(), [](int x){ return x < 7; });
-        });
-        v[idx] = 42; // Reset
-    };
-    run_find_if_middle(vi, N/2, "std::find_if int (found middle)");
-    run_find_if_middle(vi_small, N_small/2, "std::find_if int (found middle small)");
-
-    // Case 4: Find x < 7 not present
-    benchmark("std::find_if int (not found)", [&] {
-        auto it = std::find_if(vi.begin(), vi.end(), [](int x){ return x < 7; });
-    });
-    benchmark("std::find_if int (not found small)", [&] {
-        auto it = std::find_if(vi_small.begin(), vi_small.end(), [](int x){ return x < 7; });
-    });
+    // Case 3 & 4: Find x < 7 in middle
+    run_find_case(vi, N/2, "std::find_if int (found middle)", "std::find_if int (not found)",
+        [](auto begin, auto end) { return std::find_if(begin, end, [](int x){ return x < 7; }); }, true, 5);
+    run_find_case(vi_small, N_small/2, "std::find_if int (found middle small)", "std::find_if int (not found small)",
+        [](auto begin, auto end) { return std::find_if(begin, end, [](int x){ return x < 7; }); }, true, 5);
 
     // --- std::find on vector<string>
     const size_t Nstr = 1'000'000;
