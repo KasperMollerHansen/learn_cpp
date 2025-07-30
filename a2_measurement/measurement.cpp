@@ -103,7 +103,7 @@ int main() {
 
     std::string needle(20, 'X');
 
-    // Case 5: Try to find "XXXXXXXXXXXXXXXXXXXX" (likely absent)
+    // Case 5: Try to find "XXXXXXXXXXXXXXXXXXXX" (most likely absent)
     benchmark("std::find string (not found)", [&] {
         auto it = std::find(vs.begin(), vs.end(), needle);
     });
