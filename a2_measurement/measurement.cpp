@@ -41,18 +41,15 @@ int main() {
 
     // --- std::find on vector<int>
     // Case 1: Find 7 in the middle
-    vi[N/2] = 7; // Place 7 in the middle
-    benchmark("std::find int (found middle)", [&] {
-        auto it = std::find(vi.begin(), vi.end(), 7);
-    });
-
-    vi_small[N_small/2] = 7; // Place 7 in the middle of small vector
-    benchmark("std::find int (found middle small)", [&] {
-        auto it = std::find(vi_small.begin(), vi_small.end(), 7);
-    });
-
-    vi[N/2] = 42; // Reset middle value to 42
-    vi_small[N_small/2] = 42; // Reset middle value to 42 in small vector
+    auto run_find_middle = [](std::vector<int>& v, size_t idx, const std::string& name) {
+        v[idx] = 7;
+        benchmark(name, [&] {
+            auto it = std::find(v.begin(), v.end(), 7);
+        });
+        v[idx] = 42; // Reset
+    };
+    run_find_middle(vi, N/2, "std::find int (found middle)");
+    run_find_middle(vi_small, N_small/2, "std::find int (found middle small)");
 
     // Case 2: Find 7 not present
     benchmark("std::find int (not found)", [&] {
@@ -64,28 +61,22 @@ int main() {
 
     // --- std::find_if on vector<int>
     // Case 3: Find x < 7 in middle
-    vi[N/2] = 5; // Place 5 in the middle
-    benchmark("std::find_if int (found middle)", [&] {
-        auto it = std::find_if(vi.begin(), vi.end(),
-                               [](int x){ return x < 7; });
-    });
-    vi_small[N_small/2] = 5; // Place 5 in the middle of small vector
-    benchmark("std::find_if int (found middle small)", [&] {
-        auto it = std::find_if(vi_small.begin(), vi_small.end(),
-                               [](int x){ return x < 7; });
-    });
-
-    vi[N/2] = 42; // Reset middle value to 42
-    vi_small[N_small/2] = 42; // Reset middle value to 42 in small vector
+    auto run_find_if_middle = [](std::vector<int>& v, size_t idx, const std::string& name) {
+        v[idx] = 5;
+        benchmark(name, [&] {
+            auto it = std::find_if(v.begin(), v.end(), [](int x){ return x < 7; });
+        });
+        v[idx] = 42; // Reset
+    };
+    run_find_if_middle(vi, N/2, "std::find_if int (found middle)");
+    run_find_if_middle(vi_small, N_small/2, "std::find_if int (found middle small)");
 
     // Case 4: Find x < 7 not present
     benchmark("std::find_if int (not found)", [&] {
-        auto it = std::find_if(vi.begin(), vi.end(),
-                               [](int x){ return x < 7; });
+        auto it = std::find_if(vi.begin(), vi.end(), [](int x){ return x < 7; });
     });
     benchmark("std::find_if int (not found small)", [&] {
-        auto it = std::find_if(vi_small.begin(), vi_small.end(),
-                               [](int x){ return x < 7; });
+        auto it = std::find_if(vi_small.begin(), vi_small.end(), [](int x){ return x < 7; });
     });
 
     // --- std::find on vector<string>
