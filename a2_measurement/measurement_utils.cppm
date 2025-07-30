@@ -30,3 +30,38 @@ void benchmark(const std::string& name, F&& f) {
     std::cout << name << ": " << ms.count() << " ms\n";
 }
 
+export template<typename Container, typename ValueOrPredicate>
+void run_find_case(
+    Container& v,
+    size_t idx,
+    const std::string& name_found,
+    const std::string& name_not_found,
+    ValueOrPredicate finder,
+    typename Container::value_type found_value = {}
+) {
+    // Store the original value
+    auto original_value = v[idx];
+
+    // Case: value/predicate matches in the middle
+    v[idx] = found_value;
+
+    benchmark(name_found, [&] {
+        auto it = finder(v.begin(), v.end());
+        if (it != v.end())
+            std::cout << "Found at index " << format_with_dots(std::distance(v.begin(), it)) << "\n";
+        else
+            std::cout << "Not found\n";
+    });
+
+    // Reset to original value
+    v[idx] = original_value;
+
+    // Case: value/predicate does not match
+    benchmark(name_not_found, [&] {
+        auto it = finder(v.begin(), v.end());
+        if (it != v.end())
+            std::cout << "Found at index " << format_with_dots(std::distance(v.begin(), it)) << "\n";
+        else
+            std::cout << "Not found\n";
+    });
+}
