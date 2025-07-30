@@ -2,7 +2,6 @@ module;
 #include <chrono>
 #include <iostream>
 #include <string>
-#include <vector>
 
 export module measurement_utils;
 
