@@ -1,5 +1,6 @@
 # Ignore all zip files
 *.zip
+*.pdf
 
 # Ignore build folders
 build/
