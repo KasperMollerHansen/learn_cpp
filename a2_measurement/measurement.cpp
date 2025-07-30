@@ -41,9 +41,11 @@ int main() {
     std::mt19937 rng(12345);
     std::uniform_int_distribution<char> dist('A', 'Z');
     for (size_t i = 0; i < N_small; ++i) {
-        std::string s(20, 'X');
-        for (auto& c : s) c = dist(rng);
-        vs.push_back(std::move(s));
+        std::string s;
+        s.reserve(20);
+        for (size_t j = 0; j < 20; ++j)
+            s += dist(rng);
+        vs.emplace_back(std::move(s));
     }
 
     std::string needle(20, 'X');
