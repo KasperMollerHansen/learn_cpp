@@ -7,7 +7,7 @@ export module measurement_utils;
 
 using Clock = std::chrono::high_resolution_clock;
 
-export std::string format_with_dots(size_t n) {
+export std::string format_with_dots(size_t n) noexcept {
     std::string s = std::to_string(n);
     std::string result;
     int count = 0;
@@ -39,9 +39,9 @@ void run_find_case(
     typename Container::value_type found_value = {}
 ) {
     // Store the original value
-    auto original_value = v[idx];
+    const auto original_value = v[idx];
 
-    // Case: value/predicate matches in the middle
+    // Case: value matches in the middle
     v[idx] = found_value;
 
     benchmark(name_found, [&] {
@@ -55,7 +55,7 @@ void run_find_case(
     // Reset to original value
     v[idx] = original_value;
 
-    // Case: value/predicate does not match
+    // Case: value does not match
     benchmark(name_not_found, [&] {
         auto it = finder(v.begin(), v.end());
         if (it != v.end())
