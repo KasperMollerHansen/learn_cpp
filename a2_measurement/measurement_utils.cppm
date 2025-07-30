@@ -29,3 +29,4 @@ void benchmark(const std::string& name, F&& f) {
     std::chrono::duration<double, std::milli> ms = end - start;
     std::cout << name << ": " << ms.count() << " ms\n";
 }
+

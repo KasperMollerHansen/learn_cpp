@@ -1,9 +1,9 @@
-#include <algorithm>
 import measurement_utils;
 #include <random>
 #include <vector>
 #include <string>
 #include <iostream>
+#include <algorithm>
 
 template<typename Container, typename ValueOrPredicate>
 void run_find_case(Container& v, size_t idx, const std::string& name_found, const std::string& name_not_found, ValueOrPredicate finder, bool is_predicate = false, typename Container::value_type found_value = {}) {
