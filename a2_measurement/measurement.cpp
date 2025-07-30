@@ -35,13 +35,12 @@ int main() {
         [](auto begin, auto end) { return std::find_if(begin, end, [](int x){ return x < 7; }); }, 5);
 
     // --- std::find on vector<string>
-    const size_t Nstr = 1'000'000;
     std::vector<std::string> vs;
-    vs.reserve(Nstr);
+    vs.reserve(N_small);
 
     std::mt19937 rng(12345);
     std::uniform_int_distribution<char> dist('A', 'Z');
-    for (size_t i = 0; i < Nstr; ++i) {
+    for (size_t i = 0; i < N_small; ++i) {
         std::string s(20, 'X');
         for (auto& c : s) c = dist(rng);
         vs.push_back(std::move(s));
@@ -56,7 +55,7 @@ int main() {
     });
 
     // Case 6: Place it in middle and find
-    vs[Nstr/2] = needle;
+    vs[N_small/2] = needle;
     benchmark("std::find string (found middle)", [&] {
         auto it = std::find(vs.begin(), vs.end(), needle);
     });
