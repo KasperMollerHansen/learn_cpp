@@ -14,6 +14,5 @@ or
 
 The compiled file is placed in the /bin
 
-I set everything up with cmakelist to get modules working, and it finally
-worked. But vscode is still not happy, and cant understand it, even though c++23
-is set as standard...
+I set everything up with cmakelist. This time I tried with the headerfiles
+instead of modules.
