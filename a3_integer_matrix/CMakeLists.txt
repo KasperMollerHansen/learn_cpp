@@ -7,7 +7,7 @@ project(${PROJECT_NAME} LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_SCAN_FOR_MODULES ON)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3") # Enable optimizations for high performance
+# set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3") # Enable optimizations for high performance
 
 # Set output directory for executables
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_SOURCE_DIR}/bin")
