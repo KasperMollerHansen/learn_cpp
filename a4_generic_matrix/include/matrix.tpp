@@ -1,4 +1,5 @@
 #include <cstdlib>
+#include "matrix.h"
 
 // 1. Default construction: all elements gets the default value 0.
 template<typename T>
