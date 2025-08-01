@@ -1,0 +1,74 @@
+1. Constructing matrix with all zeros
+Exception caught: Imatrix: size must be greater than 0
+0 0 0 
+0 0 0 
+0 0 0 
+Matrix created with 3 rows and 3 columns.
+
+2. Testing copy and move constructors and assignment operator.
+Copied matrix:
+0 0 0 
+0 0 0 
+0 0 0 
+Moved matrix:
+0 0 0 
+0 0 0 
+0 0 0 
+Original matrix (should be empty):
+[Empty matrix]
+
+3. Testing subscripting operator.
+Value at (0, 0) after setting to 10:
+10
+Matrix after setting value:
+10 0 0 
+0 0 0 
+0 0 0 
+Exception caught: Imatrix: index out of range
+
+4. Testing arithmetic operations.
+Matrix m1:
+6 10 6 
+2 1 4 
+0 6 3 
+Matrix m2:
+1 8 7 
+5 3 7 
+4 9 10 
+Result of m1 + m2:
+7 18 13 
+7 4 11 
+4 15 13 
+Result of m1 - m2:
+5 2 -1 
+-3 -2 -3 
+-4 -3 -7 
+Result of m1 * m2:
+80 132 172 
+23 55 61 
+42 45 72 
+Result of m1 / m2:
+6 1 0 
+0 0 0 
+0 0 0 
+Result of m1 % m2:
+0 2 6 
+2 1 4 
+0 6 3 
+
+5. Testing Move operation.
+Matrix m1:
+6 10 6 
+2 1 4 
+0 6 3 
+Moving value from (0, 0) to (1, 0).
+Matrix m1 after move:
+0 10 6 
+6 1 4 
+0 6 3 
+
+6. Testing Row operation.
+Row 1: 6 1 4 
+
+7. Testing Column operation.
+Column 1: 10 1 6 
