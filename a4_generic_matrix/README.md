@@ -15,4 +15,6 @@ or
 The compiled file is placed in the /bin
 
 I set everything up with cmakelist. This time I tried with the headerfiles
-instead of modules.
+instead of modules. This seems to be a bit annoying since you need to declare
+everything twice regarding template and concepts. Might be better to set it up
+as a module when working with generic programming
