@@ -8,11 +8,15 @@ size_t b = 2;
 // Minimal Chess_piece type
 struct Chess_piece {
     std::string name;
-    Chess_piece() : name("empty") {}
+    Chess_piece() : name("") {}
     Chess_piece(const std::string& n) : name(n) {}
     // For printing
     friend std::ostream& operator<<(std::ostream& os, const Chess_piece& cp) {
         return os << cp.name;
+    }
+    // Addable: concatenate names
+    Chess_piece operator+(const Chess_piece& other) const {
+        return Chess_piece(name + other.name);
     }
 };
 
@@ -117,6 +121,14 @@ int main() {
     m10(1, 0) = Chess_piece("bishop");
     m10(1, 1) = Chess_piece("rook");
     m10.Print();
+
+    m10.Move({0, 0}, {1, 1});
+    std::cout << "After moving (0, 0) to (1, 1):\n";
+    m10.Print();
+
+    auto m11 = m10 + m10; // This will work if Chess_piece has an operator+
+    std::cout << "Result of adding two Chess_piece matrices:\n";
+    m11.Print();
 
     return 0;
 }

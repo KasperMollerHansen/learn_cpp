@@ -49,7 +49,6 @@ public:
     std::vector<T> Row(size_t n) const;
     std::vector<T> Column(size_t n) const;
 
-
     // Utility functions
     void Print() const;
 };
