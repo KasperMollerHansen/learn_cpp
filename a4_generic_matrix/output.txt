@@ -1,0 +1,67 @@
+kasper@kasper-Zenbook:~/learn_cpp$ ./a4_generic_matrix/run.sh 
+1 2 
+3 4 
+Matrix created with 2 rows and 2 columns.
+1.1 2.2 
+3.3 4.4 
+Float matrix created with 2 rows and 2 columns.
+hello world 
+Year 2025 
+String matrix created with 2 rows and 2 columns.
+
+After editing, the first element is: 5
+Matrix after editing:
+5 2 
+3 4 
+After editing, the first element is: 5.5
+Matrix after editing:
+5.5 2.2 
+3.3 4.4 
+After editing, the first element is: Goodbye
+Matrix after editing:
+Goodbye world 
+Year 2025 
+Result of adding two integer matrices:
+10 4 
+6 8 
+Result of subtracting two float matrices:
+0 0 
+0 0 
+Result of multiplying two integer matrices:
+31 18 
+27 22 
+Result of dividing two float matrices:
+1 1 
+1 1 
+Result of adding two string matrices:
+GoodbyeGoodbye worldworld 
+YearYear 20252025 
+Moving element from (0, 0) to (1, 1) in integer matrix:
+0 2 
+3 5 
+Moving element from (0, 0) to (1, 1) in float matrix:
+0 2.2 
+3.3 5.5 
+Moving element from (0, 0) to (1, 1) in string matrix:
+ world 
+Year Goodbye 
+Row 0 of integer matrix:
+Row 0: 0 2 
+Column 1 of integer matrix:
+Column 1: 2 5 
+Row 0 of float matrix:
+Row 0: 0 2.2 
+Column 1 of float matrix:
+Column 1: 2.2 5.5 
+Row 0 of string matrix:
+Row 0:  world 
+Column 1 of string matrix:
+Column 1: world Goodbye 
+pawn king 
+bishop rook 
+After moving (0, 0) to (1, 1):
+ king 
+bishop pawn 
+Result of adding two Chess_piece matrices:
+ kingking 
+bishopbishop pawnpawn 
