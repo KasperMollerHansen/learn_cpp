@@ -25,7 +25,7 @@ const T& Matrix<T>::operator()(size_t x, size_t y) const {
 
 // 4. Arithmetic operators
 template<typename T>
-Matrix<T> Matrix<T>::operator+(const Matrix& other) const requires requires (T a, T b) { a + b; } {
+Matrix<T> Matrix<T>::operator+(const Matrix& other) const requires (Arithmetic<T> || Addable<T>) {
     if (rows != other.rows || cols != other.cols)
         throw std::invalid_argument("Matrix: dimensions must match for addition");
     Matrix result(rows, cols);
@@ -35,7 +35,7 @@ Matrix<T> Matrix<T>::operator+(const Matrix& other) const requires requires (T a
     return result;
 }
 template<typename T>
-Matrix<T> Matrix<T>::operator-(const Matrix& other) const requires requires (T a, T b) { a - b; } {
+Matrix<T> Matrix<T>::operator-(const Matrix& other) const requires Arithmetic<T> {
     if (rows != other.rows || cols != other.cols)
         throw std::invalid_argument("Matrix: dimensions must match for subtraction");
     Matrix result(rows, cols);
@@ -45,7 +45,7 @@ Matrix<T> Matrix<T>::operator-(const Matrix& other) const requires requires (T a
     return result;
 }
 template<typename T>
-Matrix<T> Matrix<T>::operator*(const Matrix& other) const requires requires (T a, T b) { a * b; } {
+Matrix<T> Matrix<T>::operator*(const Matrix& other) const requires Arithmetic<T> {
     if (cols != other.rows)
         throw std::invalid_argument("Matrix: dimensions must match for multiplication");
     Matrix result(rows, other.cols);
@@ -56,7 +56,7 @@ Matrix<T> Matrix<T>::operator*(const Matrix& other) const requires requires (T a
     return result;
 }
 template<typename T>
-Matrix<T> Matrix<T>::operator/(const Matrix& other) const requires requires (T a, T b) { a / b; } {
+Matrix<T> Matrix<T>::operator/(const Matrix& other) const requires Arithmetic<T> {
     if (rows != other.rows || cols != other.cols)
         throw std::invalid_argument("Matrix: dimensions must match for division");
     Matrix result(rows, cols);
@@ -69,7 +69,7 @@ Matrix<T> Matrix<T>::operator/(const Matrix& other) const requires requires (T a
     return result;
 }
 template<typename T>
-Matrix<T> Matrix<T>::operator%(const Matrix& other) const requires requires (T a, T b) { a % b; } {
+Matrix<T> Matrix<T>::operator%(const Matrix& other) const requires Arithmetic<T> {
     if (rows != other.rows || cols != other.cols)
         throw std::invalid_argument("Matrix: dimensions must match for modulo");
     Matrix result(rows, cols);

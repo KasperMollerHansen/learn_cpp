@@ -3,6 +3,13 @@
 #include <utility>
 #include <stdexcept>
 #include <iostream>
+#include <type_traits>
+
+// Concept for Arithmetics
+template<typename T>
+concept Arithmetic = std::is_arithmetic_v<T>;
+template<typename T>
+concept Addable = requires(T a, T b) { a + b; };
 
 // Template declaration
 template<typename T>
@@ -26,11 +33,11 @@ public:
     const T& operator()(size_t x, size_t y) const;
 
     // 4. Arithmetic operators
-    Matrix operator+(const Matrix& other) const requires requires (T a, T b) { a + b; };
-    Matrix operator-(const Matrix& other) const requires requires (T a, T b) { a - b; };
-    Matrix operator*(const Matrix& other) const requires requires (T a, T b) { a * b; };
-    Matrix operator/(const Matrix& other) const requires requires (T a, T b) { a / b; };
-    Matrix operator%(const Matrix& other) const requires requires (T a, T b) { a % b; };
+    Matrix operator+(const Matrix& other) const requires (Arithmetic<T> || Addable<T>);
+    Matrix operator-(const Matrix& other) const requires Arithmetic<T>;
+    Matrix operator*(const Matrix& other) const requires Arithmetic<T>;
+    Matrix operator/(const Matrix& other) const requires Arithmetic<T>;
+    Matrix operator%(const Matrix& other) const requires Arithmetic<T>;
 
     // 5. Move elements within the matrix
     void Move(std::pair<size_t, size_t> src, std::pair<size_t, size_t> dst);
