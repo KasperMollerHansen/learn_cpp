@@ -5,6 +5,18 @@
 size_t a = 2;
 size_t b = 2;
 
+// Minimal Chess_piece type
+struct Chess_piece {
+    std::string name;
+    Chess_piece() : name("empty") {}
+    Chess_piece(const std::string& n) : name(n) {}
+    // For printing
+    friend std::ostream& operator<<(std::ostream& os, const Chess_piece& cp) {
+        return os << cp.name;
+    }
+};
+
+
 // Helper function to print a vector (row or column)
 template<typename T>
 void PrintVector(const std::vector<T>& vec, const std::string& label) {
@@ -97,6 +109,14 @@ int main() {
     PrintVector(m3.Row(0), "Row 0");
     std::cout << "Column 1 of string matrix:\n";
     PrintVector(m3.Column(1), "Column 1");  
+
+    // Matrix<Chess_piece>
+    Matrix<Chess_piece> m10(a, b);
+    m10(0, 0) = Chess_piece("pawn");
+    m10(0, 1) = Chess_piece("king");
+    m10(1, 0) = Chess_piece("bishop");
+    m10(1, 1) = Chess_piece("rook");
+    m10.Print();
 
     return 0;
 }
