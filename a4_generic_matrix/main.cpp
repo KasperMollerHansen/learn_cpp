@@ -71,13 +71,13 @@ int main() {
     auto m8 = m3 + m3;
     std::cout << "Result of adding two string matrices:\n";
     m8.Print();
-    auto m9 = m3 - m3; // This crashes at compile time, since std::string does not support subtraction
+    // auto m9 = m3 - m3; // This crashes at compile time, since std::string does not support subtraction
 
     // Test move within the matrix
     std::cout << "Moving element from (0, 0) to (1, 1) in integer matrix:\n";
     m1.Move({0, 0}, {1, 1});
     m1.Print();
-    std::cout << "Moving element from (0, 0) to (1, 1) in float matrix:\n";
+    std::cout << "Movingor arithmetic types element from (0, 0) to (1, 1) in float matrix:\n";
     m2.Move({0, 0}, {1, 1});
     m2.Print();
     std::cout << "Moving element from (0, 0) to (1, 1) in string matrix:\n";

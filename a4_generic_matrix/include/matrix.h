@@ -5,7 +5,7 @@
 #include <iostream>
 #include <type_traits>
 
-// Concept for Arithmetics
+// Concept for arithmetic types and addable types
 template<typename T>
 concept Arithmetic = std::is_arithmetic_v<T>;
 template<typename T>
