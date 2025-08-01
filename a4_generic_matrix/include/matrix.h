@@ -10,6 +10,9 @@ template<typename T>
 concept Arithmetic = std::is_arithmetic_v<T>;
 template<typename T>
 concept Addable = requires(T a, T b) { a + b; };
+template<typename T, typename U>
+concept SameType = std::is_same_v<T, U>;
+
 
 // Template declaration
 template<typename T>

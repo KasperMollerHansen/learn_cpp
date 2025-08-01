@@ -77,7 +77,7 @@ int main() {
     std::cout << "Moving element from (0, 0) to (1, 1) in integer matrix:\n";
     m1.Move({0, 0}, {1, 1});
     m1.Print();
-    std::cout << "Movingor arithmetic types element from (0, 0) to (1, 1) in float matrix:\n";
+    std::cout << "Moving element from (0, 0) to (1, 1) in float matrix:\n";
     m2.Move({0, 0}, {1, 1});
     m2.Print();
     std::cout << "Moving element from (0, 0) to (1, 1) in string matrix:\n";
