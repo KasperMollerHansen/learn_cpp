@@ -7,8 +7,6 @@ Matrix<T>::Matrix(size_t r, size_t c) : data(r, std::vector<T>(c, T{})), rows(r)
     if (r == 0 || c == 0)
         throw std::invalid_argument("Matrix: size must be greater than 0");
 }
-// 2. No need to define copy and move constructors and assignment operators explicitly
-// as they are defaulted in the class definition.
 
 // 3. Subscripting: m(x,y) is the x, y element. Assignable.
 template<typename T>

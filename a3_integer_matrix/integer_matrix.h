@@ -10,10 +10,12 @@ class Imatrix {
 
 public:
     Imatrix(size_t r, size_t c);
-    Imatrix(const Imatrix& other);
-    Imatrix(Imatrix&& other) noexcept;
-    Imatrix& operator=(const Imatrix& other);
-    Imatrix& operator=(Imatrix&& other) noexcept;
+
+     // Since we use std::vector, we can use the default copy and move constructors and assignment operators.
+    // Imatrix(const Imatrix& other);
+    // Imatrix(Imatrix&& other) noexcept;
+    // Imatrix& operator=(const Imatrix& other);
+    // Imatrix& operator=(Imatrix&& other) noexcept;
 
     int& operator()(size_t x, size_t y);
 

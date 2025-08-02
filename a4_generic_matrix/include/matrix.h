@@ -26,11 +26,8 @@ public:
     ~Matrix() = default;
 
     // 2. Copy and move constructors and assignment operators
-    Matrix(const Matrix& other) = default;
-    Matrix(Matrix&& other) noexcept = default;
-    Matrix& operator=(const Matrix& other) = default;
-    Matrix& operator=(Matrix&& other) noexcept = default;
-
+    // Inherited for std:vector
+  
     // 3. Subscripting operator
     T& operator()(size_t x, size_t y);
     const T& operator()(size_t x, size_t y) const;
