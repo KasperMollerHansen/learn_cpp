@@ -51,7 +51,6 @@ export struct Chess_piece {
     }
 };
 
-
 // Chess board creation function
 export Matrix<Chess_piece> CreateChessBoard() {
     Matrix<Chess_piece> board(8, 8);
