@@ -43,10 +43,12 @@ int main() {
 
     // 2. Test assignment operator and copy/move constructors
     std::cout << "\n2. Testing copy and move constructors and assignment operator.\n";
-    Imatrix m2 = m1; // Copy constructor
+    Imatrix m2 = m1; // Copy assignment
+    Imatrix m4 (m2); // Copy constructor
     Imatrix m3 = std::move(m1); // Move constructor
     std::cout << "Copied matrix:\n";
     m2.Print();
+
     std::cout << "Moved matrix:\n";
     m3.Print();
     std::cout << "Original matrix (should be empty):\n";

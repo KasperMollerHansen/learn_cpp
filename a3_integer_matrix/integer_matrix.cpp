@@ -7,36 +7,36 @@ Imatrix::Imatrix(size_t r, size_t c) : data(r, std::vector<int>(c, 0)), rows(r),
         throw std::invalid_argument("Imatrix: size must be greater than 0");
 }
 
-// 2. Copy constructor
-Imatrix::Imatrix(const Imatrix& other) : data(other.data), rows(other.rows), cols(other.cols) {}
+// // 2. Copy constructor
+// Imatrix::Imatrix(const Imatrix& other) : data(other.data), rows(other.rows), cols(other.cols) {}
 
-// 2. Move constructor
-Imatrix::Imatrix(Imatrix&& other) noexcept : data(std::move(other.data)), rows(other.rows), cols(other.cols) {
-    other.rows = 0;
-    other.cols = 0;
-}
+// // 2. Move constructor
+// Imatrix::Imatrix(Imatrix&& other) noexcept : data(std::move(other.data)), rows(other.rows), cols(other.cols) {
+//     other.rows = 0;
+//     other.cols = 0;
+// }
 
-// 2. Assignment operator (=)
-Imatrix& Imatrix::operator=(const Imatrix& other) {
-    if (this != &other) {
-        data = other.data;
-        rows = other.rows;
-        cols = other.cols;
-    }
-    return *this;
-}
+// // 2. Assignment operator (=)
+// Imatrix& Imatrix::operator=(const Imatrix& other) {
+//     if (this != &other) {
+//         data = other.data;
+//         rows = other.rows;
+//         cols = other.cols;
+//     }
+//     return *this;
+// }
 
-// 2. Move assignment operator
-Imatrix& Imatrix::operator=(Imatrix&& other) noexcept {
-    if (this != &other) {
-        data = std::move(other.data);
-        rows = other.rows;
-        cols = other.cols;
-        other.rows = 0;
-        other.cols = 0;
-    }
-    return *this;
-}
+// // 2. Move assignment operator
+// Imatrix& Imatrix::operator=(Imatrix&& other) noexcept {
+//     if (this != &other) {
+//         data = std::move(other.data);
+//         rows = other.rows;
+//         cols = other.cols;
+//         other.rows = 0;
+//         other.cols = 0;
+//     }
+//     return *this;
+// }
 
 // 3. Subscripting: m(x,y) is the x, y element. Assignable.
 int& Imatrix::operator()(size_t x, size_t y) {
