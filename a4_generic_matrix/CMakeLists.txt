@@ -22,7 +22,7 @@ file(GLOB SRC_FILES
 )
 
 # Collect all .cppm files for modules
-file(GLOB MODULE_FILES "${CMAKE_SOURCE_DIR}/*.cppm")
+file(GLOB MODULE_FILES "${CMAKE_SOURCE_DIR}/lib/*.cppm")
 
 add_executable(${PROJECT_NAME} ${SRC_FILES})
 
