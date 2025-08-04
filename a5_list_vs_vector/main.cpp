@@ -41,7 +41,7 @@ int main()
 
     // Benchmarking
     std::cout << "Starting benchmarks..." << std::endl;
-    std::vector<int> N_list = {100'000, 500'000, 1'000'000};
+    std::vector<int> N_list = {100, 500, 1'000};
     std::vector<unsigned int> seed_list = {42, 43, 44};
 
     std::cout << "Benchmarking vector insert/remove..." << std::endl;
