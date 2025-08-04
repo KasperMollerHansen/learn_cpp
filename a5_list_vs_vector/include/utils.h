@@ -5,6 +5,7 @@
 #include <tuple>
 
 
+// We could make a template for list and vector, but we keep them separate for clarity
 void test_vector_insert_remove(int N, unsigned int seed);
 void test_list_insert_remove(int N, unsigned int seed);
 void test_set_insert_remove(int N, unsigned int seed);
