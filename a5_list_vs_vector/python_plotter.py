@@ -18,6 +18,7 @@ files = {
 vector_data = pd.read_csv(os.path.join(data_dir, files["vector"]))
 list_data = pd.read_csv(os.path.join(data_dir, files["list"]))
 set_data = pd.read_csv(os.path.join(data_dir, files["set"]))
+#%%
 
 # Insert time plot
 fig_insert = go.Figure()
@@ -28,12 +29,13 @@ for label, df in zip(["vector", "list", "set"], [vector_data, list_data, set_dat
         mode='lines+markers', name=label
     ))
 fig_insert.update_layout(
-    title="Insert Times for Vector, List, and Set",
-    xaxis_title="N",
-    yaxis_title="Insert Time (ms)",
+    title="<b>Insert Times</b><br><i>Vector, List, and Set</i>",
+    xaxis_title="Length of Container (N)",
+    yaxis_title="Time (ms)",
     legend_title="Container",
     template="plotly_white"
 )
+
 fig_insert.show()
 fig_insert.write_image(os.path.join(plot_dir, "insert_times_plot.png"))
 
@@ -46,9 +48,9 @@ for label, df in zip(["vector", "list", "set"], [vector_data, list_data, set_dat
         mode='lines+markers', name=label
     ))
 fig_remove.update_layout(
-    title="Remove Times for Vector, List, and Set",
-    xaxis_title="N",
-    yaxis_title="Remove Time (ms)",
+    title="<b>Remove Times</b><br><i>Vector, List, and Set</i>",
+    xaxis_title="Length of Container (N)",
+    yaxis_title="Time (ms)",
     legend_title="Container",
     template="plotly_white"
 )
@@ -65,9 +67,9 @@ for label, df in zip(["vector", "list", "set"], [vector_data, list_data, set_dat
         mode='lines+markers', name=label
     ))
 fig_total.update_layout(
-    title="Total (Insert + Remove) Times for Vector, List, and Set",
-    xaxis_title="N",
-    yaxis_title="Total Time (ms)",
+    title="<b>Total Times (Insert + Remove)</b><br><i>Vector, List, and Set</i>",
+    xaxis_title="Length of Container (N)",
+    yaxis_title="Time (ms)",
     legend_title="Container",
     template="plotly_white"
 )
