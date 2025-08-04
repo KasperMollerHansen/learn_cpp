@@ -31,60 +31,35 @@ std::vector<int> _generate_random_deletion_indices(int N, unsigned int seed) {
 }
 
 // Nice feature, that the compiler chose the best suited print function, based on type of input!
-void print(const std::vector<int>& vec) {
-    for (int num : vec) {
-        std::cout << num << " ";
-    }
-    std::cout << std::endl;
-}
-
-void print(const std::list<int>& lst) {
-    for (int num : lst) {
-        std::cout << num << " ";
-    }
-    std::cout << std::endl;
-}
-
-void print(const std::set<int>& s) {
-    for (int num : s) {
-        std::cout << num << " ";
+template<typename Container>
+void _print(const Container& container) {
+    for (const auto& elem : container) {
+        std::cout << elem << " ";
     }
     std::cout << std::endl;
 }
 
 // --- INSERT FUNCTIONS ---
 
-std::vector<int> _insert_numbers_sorted_vector(const std::vector<int>& numbers_to_insert, bool print_each_step) {
-    std::vector<int> result;
+template<typename SequenceContainer>
+SequenceContainer _insert_numbers_sorted(const std::vector<int>& numbers_to_insert, bool print_each_step) {
+    SequenceContainer result;
     for (int num : numbers_to_insert) {
         auto it = result.begin();
         while (it != result.end() && *it < num) {
             ++it;
         }
         result.insert(it, num);
-        if (print_each_step) print(result);
+        if (print_each_step) _print(result);
     }
     return result;
 }
 
-std::list<int> _insert_numbers_sorted_list(const std::vector<int>& numbers_to_insert, bool print_each_step) {
-    std::list<int> result;
-    for (int num : numbers_to_insert) {
-        auto it = result.begin();
-        while (it != result.end() && *it < num) {
-            ++it;
-        }
-        result.insert(it, num);
-        if (print_each_step) print(result);
-    }
-    return result;
-}
-
-std::set<int> _insert_numbers_set(const std::vector<int>& numbers_to_insert, bool print_each_step) {
+std::set<int> _insert_numbers_sorted_set(const std::vector<int>& numbers_to_insert, bool print_each_step) {
     std::set<int> result;
     for (int num : numbers_to_insert) {
         result.insert(num); // std::set keeps sorted order
-        if (print_each_step) print(result);
+        if (print_each_step) _print(result);
     }
     return result;
 }
@@ -98,7 +73,7 @@ void _remove_from_container(Container& container, const std::vector<int>& remova
             for (int i = 0; i < idx; ++i) ++it;
             container.erase(it);
         }
-        if (print_each_step) print(container);
+        if (print_each_step) _print(container);
     }
 }
 
@@ -110,22 +85,22 @@ void test_vector_insert_remove(int N, unsigned int seed) {
     std::vector<int> removal_indices = _generate_random_deletion_indices(N, seed);
 
     std::cout << "Random numbers for insertion: ";
-    print(numbers);
+    _print(numbers);
 
     std::cout << "Random indices for removal: ";
-    print(removal_indices);
+    _print(removal_indices);
 
     // Insert numbers in sorted order
-    std::vector<int> vec = _insert_numbers_sorted_vector(numbers, true);
+    std::vector<int> vec = _insert_numbers_sorted<std::vector<int>>(numbers, true);
 
     std::cout << "Vector after all insertions: ";
-    print(vec);
+    _print(vec);
 
     // Remove elements using removal_indices
     _remove_from_container(vec, removal_indices, true);
 
     std::cout << "Vector after all removals: ";
-    print(vec);
+    _print(vec);
 }
 
 void test_list_insert_remove(int N, unsigned int seed) {
@@ -134,22 +109,22 @@ void test_list_insert_remove(int N, unsigned int seed) {
     std::vector<int> removal_indices = _generate_random_deletion_indices(N, seed);
 
     std::cout << "Random numbers for insertion: ";
-    print(numbers);
+    _print(numbers);
 
     std::cout << "Random indices for removal: ";
-    print(removal_indices);
+    _print(removal_indices);
 
     // Insert numbers in sorted order
-    std::list<int> lst = _insert_numbers_sorted_list(numbers, true);
+    std::list<int> lst = _insert_numbers_sorted<std::list<int>>(numbers, true);
 
     std::cout << "List after all insertions: ";
-    print(lst);
+    _print(lst);
 
     // Remove elements using removal_indices
     _remove_from_container(lst, removal_indices, true);
 
     std::cout << "List after all removals: ";
-    print(lst);
+    _print(lst);
 }
 
 void test_set_insert_remove(int N, unsigned int seed) {
@@ -158,22 +133,22 @@ void test_set_insert_remove(int N, unsigned int seed) {
     std::vector<int> removal_indices = _generate_random_deletion_indices(N, seed);
 
     std::cout << "Random numbers for insertion: ";
-    print(numbers);
+    _print(numbers);
 
     std::cout << "Random indices for removal: ";
-    print(removal_indices);
+    _print(removal_indices);
 
     // Insert numbers in set (order doesn't matter, set is always sorted)
-    std::set<int> s = _insert_numbers_set(numbers, true);
+    std::set<int> s = _insert_numbers_sorted_set(numbers, true);
 
     std::cout << "Set after all insertions: ";
-    print(s);
+    _print(s);
 
     // Remove elements using removal_indices
     _remove_from_container(s, removal_indices, true);
 
     std::cout << "Set after all removals: ";
-    print(s);
+    _print(s);
 }
 
 // --- REAL FUNCTIONS ---
@@ -183,7 +158,7 @@ std::tuple<double, double> vector_insert_remove(int N, unsigned int seed) {
     std::vector<int> removal_indices = _generate_random_deletion_indices(N, seed);
 
     auto start_insert = std::chrono::high_resolution_clock::now();
-    std::vector<int> vec = _insert_numbers_sorted_vector(numbers, false);
+    std::vector<int> vec = _insert_numbers_sorted<std::vector<int>>(numbers, false);
     auto end_insert = std::chrono::high_resolution_clock::now();
 
     double insert_time = std::chrono::duration<double, std::milli>(end_insert - start_insert).count();
@@ -202,7 +177,7 @@ std::tuple<double, double> list_insert_remove(int N, unsigned int seed) {
     std::vector<int> removal_indices = _generate_random_deletion_indices(N, seed);
 
     auto start_insert = std::chrono::high_resolution_clock::now();
-    std::list<int> lst = _insert_numbers_sorted_list(numbers, false);
+    std::list<int> lst = _insert_numbers_sorted<std::list<int>>(numbers, false);
     auto end_insert = std::chrono::high_resolution_clock::now();
 
     double insert_time = std::chrono::duration<double, std::milli>(end_insert - start_insert).count();
@@ -221,7 +196,7 @@ std::tuple<double, double> set_insert_remove(int N, unsigned int seed) {
     std::vector<int> removal_indices = _generate_random_deletion_indices(N, seed);
 
     auto start_insert = std::chrono::high_resolution_clock::now();
-    std::set<int> s = _insert_numbers_set(numbers, false);
+    std::set<int> s = _insert_numbers_sorted_set(numbers, false);
     auto end_insert = std::chrono::high_resolution_clock::now();
 
     double insert_time = std::chrono::duration<double, std::milli>(end_insert - start_insert).count();
