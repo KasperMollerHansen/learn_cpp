@@ -12,8 +12,8 @@ void benchmark_insert_remove(
 {
     std::ofstream out(filename);
     out << "N,seed,insert_time_ms,remove_time_ms\n";
-    for (unsigned int seed : seed_list) {
-        for (int N : N_list) {
+    for (int N : N_list) {
+        for (unsigned int seed : seed_list) {
             auto [insert_time, remove_time] = insert_remove_func(N, seed);
             out << N << "," << seed << "," << insert_time << "," << remove_time << "\n";
         }
@@ -45,11 +45,11 @@ int main()
     std::vector<unsigned int> seed_list = {42, 43, 44};
 
     std::cout << "Benchmarking vector insert/remove..." << std::endl;
-    benchmark_insert_remove(N_list, seed_list, vector_insert_remove, "vector_benchmark.csv");
+    benchmark_insert_remove(N_list, seed_list, vector_insert_remove, "../output_data/vector_benchmark.csv");
     std::cout << "Benchmarking list insert/remove..." << std::endl;
-    benchmark_insert_remove(N_list, seed_list, list_insert_remove, "list_benchmark.csv");
+    benchmark_insert_remove(N_list, seed_list, list_insert_remove, "../output_data/list_benchmark.csv");
     std::cout << "Benchmarking set insert/remove..." << std::endl;
-    benchmark_insert_remove(N_list, seed_list, set_insert_remove, "set_benchmark.csv");
+    benchmark_insert_remove(N_list, seed_list, set_insert_remove, "../output_data/set_benchmark.csv");
 
     return 0;
 
