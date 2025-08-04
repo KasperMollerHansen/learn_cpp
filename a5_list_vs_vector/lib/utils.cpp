@@ -52,77 +52,78 @@ void print(const std::set<int>& s) {
     std::cout << std::endl;
 }
 
-std::vector<int> _insert_numbers_sorted_vector(const std::vector<int>& numbers_to_insert, bool print_each_step = false) {
+// --- INSERT FUNCTIONS ---
+
+std::vector<int> _insert_numbers_sorted_vector(const std::vector<int>& numbers_to_insert, bool print_each_step) {
     std::vector<int> result;
     for (int num : numbers_to_insert) {
-        auto pos = std::lower_bound(result.begin(), result.end(), num);
-        result.insert(pos, num);
-        if (print_each_step) {
-            print(result);
+        auto it = result.begin();
+        while (it != result.end() && *it < num) {
+            ++it;
         }
+        result.insert(it, num);
+        if (print_each_step) print(result);
     }
     return result;
 }
 
-std::list<int> _insert_numbers_sorted_list(const std::vector<int>& numbers_to_insert, bool print_each_step = false) {
+std::list<int> _insert_numbers_sorted_list(const std::vector<int>& numbers_to_insert, bool print_each_step) {
     std::list<int> result;
     for (int num : numbers_to_insert) {
-        auto pos = std::find_if(result.begin(), result.end(), [num](int x){ return x >= num; });
-        result.insert(pos, num);
-        if (print_each_step) {
-            print(result);
+        auto it = result.begin();
+        while (it != result.end() && *it < num) {
+            ++it;
         }
+        result.insert(it, num);
+        if (print_each_step) print(result);
     }
     return result;
 }
 
-std::set<int> _insert_numbers_set(const std::vector<int>& numbers_to_insert, bool print_each_step = false) {
+std::set<int> _insert_numbers_set(const std::vector<int>& numbers_to_insert, bool print_each_step) {
     std::set<int> result;
     for (int num : numbers_to_insert) {
-        result.insert(num);
-        if (print_each_step) {
-            print(result);
-        }
+        result.insert(num); // std::set keeps sorted order
+        if (print_each_step) print(result);
     }
     return result;
 }
 
+// --- REMOVE FUNCTIONS ---
 void _remove_from_vector(std::vector<int>& vec, const std::vector<int>& removal_indices, bool print_each_step = false) {
     for (int idx : removal_indices) {
         if (!vec.empty() && idx < vec.size()) {
-            vec.erase(vec.begin() + idx);
+            auto it = vec.begin();
+            for (int i = 0; i < idx; ++i) ++it;
+            vec.erase(it);
         }
-        if (print_each_step) {
-            print(vec);
-        }
+        if (print_each_step) print(vec);
     }
 }
 
-void _remove_from_list(std::list<int>& lst, const std::vector<int>& removal_indices, bool print_each_step = false) {
+void _remove_from_list(std::list<int>& lst, const std::vector<int>& removal_indices, bool print_each_step) {
     for (int idx : removal_indices) {
         if (!lst.empty() && idx < lst.size()) {
             auto it = lst.begin();
-            std::advance(it, idx);
+            for (int i = 0; i < idx; ++i) ++it;
             lst.erase(it);
         }
-        if (print_each_step) {
-            print(lst);
-        }
+        if (print_each_step) print(lst);
     }
 }
 
-void _remove_from_set(std::set<int>& s, const std::vector<int>& removal_indices, bool print_each_step = false) {
+void _remove_from_set(std::set<int>& s, const std::vector<int>& removal_indices, bool print_each_step) {
     for (int idx : removal_indices) {
         if (!s.empty() && idx < s.size()) {
             auto it = s.begin();
-            std::advance(it, idx);
+            for (int i = 0; i < idx; ++i) ++it;
             s.erase(it);
         }
-        if (print_each_step) {
-            print(s);
-        }
+        if (print_each_step) print(s);
     }
 }
+
+// --- TEST FUNCTIONS ---
 
 void test_vector_insert_remove(int N, unsigned int seed) {
     // Generate random numbers and indices
@@ -195,7 +196,8 @@ void test_set_insert_remove(int N, unsigned int seed) {
     std::cout << "Set after all removals: ";
     print(s);
 }
-// --- Real functions start here ---
+
+// --- REAL FUNCTIONS ---
 
 std::tuple<double, double> vector_insert_remove(int N, unsigned int seed) {
     std::vector<int> numbers = _generate_random_numbers_for_insertion(N, seed);
