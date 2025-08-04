@@ -21,9 +21,6 @@ void benchmark_insert_remove(
     out.close();
 }
 
-
-
-
 int main()
 {
     // Testing of each contatiner's insert and remove functions

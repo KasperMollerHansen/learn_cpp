@@ -89,37 +89,16 @@ std::set<int> _insert_numbers_set(const std::vector<int>& numbers_to_insert, boo
     return result;
 }
 
-// --- REMOVE FUNCTIONS ---
-void _remove_from_vector(std::vector<int>& vec, const std::vector<int>& removal_indices, bool print_each_step = false) {
+// --- REMOVE FUNCTION ---
+template<typename Container>
+void _remove_from_container(Container& container, const std::vector<int>& removal_indices, bool print_each_step = false) {
     for (int idx : removal_indices) {
-        if (!vec.empty() && idx < vec.size()) {
-            auto it = vec.begin();
+        if (!container.empty() && idx < container.size()) {
+            auto it = container.begin();
             for (int i = 0; i < idx; ++i) ++it;
-            vec.erase(it);
+            container.erase(it);
         }
-        if (print_each_step) print(vec);
-    }
-}
-
-void _remove_from_list(std::list<int>& lst, const std::vector<int>& removal_indices, bool print_each_step) {
-    for (int idx : removal_indices) {
-        if (!lst.empty() && idx < lst.size()) {
-            auto it = lst.begin();
-            for (int i = 0; i < idx; ++i) ++it;
-            lst.erase(it);
-        }
-        if (print_each_step) print(lst);
-    }
-}
-
-void _remove_from_set(std::set<int>& s, const std::vector<int>& removal_indices, bool print_each_step) {
-    for (int idx : removal_indices) {
-        if (!s.empty() && idx < s.size()) {
-            auto it = s.begin();
-            for (int i = 0; i < idx; ++i) ++it;
-            s.erase(it);
-        }
-        if (print_each_step) print(s);
+        if (print_each_step) print(container);
     }
 }
 
@@ -143,7 +122,7 @@ void test_vector_insert_remove(int N, unsigned int seed) {
     print(vec);
 
     // Remove elements using removal_indices
-    _remove_from_vector(vec, removal_indices, true);
+    _remove_from_container(vec, removal_indices, true);
 
     std::cout << "Vector after all removals: ";
     print(vec);
@@ -167,7 +146,7 @@ void test_list_insert_remove(int N, unsigned int seed) {
     print(lst);
 
     // Remove elements using removal_indices
-    _remove_from_list(lst, removal_indices, true);
+    _remove_from_container(lst, removal_indices, true);
 
     std::cout << "List after all removals: ";
     print(lst);
@@ -191,7 +170,7 @@ void test_set_insert_remove(int N, unsigned int seed) {
     print(s);
 
     // Remove elements using removal_indices
-    _remove_from_set(s, removal_indices, true);
+    _remove_from_container(s, removal_indices, true);
 
     std::cout << "Set after all removals: ";
     print(s);
@@ -210,7 +189,7 @@ std::tuple<double, double> vector_insert_remove(int N, unsigned int seed) {
     double insert_time = std::chrono::duration<double, std::milli>(end_insert - start_insert).count();
 
     auto start_remove = std::chrono::high_resolution_clock::now();
-    _remove_from_vector(vec, removal_indices, false);
+    _remove_from_container(vec, removal_indices, false);
     auto end_remove = std::chrono::high_resolution_clock::now();
 
     double remove_time = std::chrono::duration<double, std::milli>(end_remove - start_remove).count();
@@ -229,7 +208,7 @@ std::tuple<double, double> list_insert_remove(int N, unsigned int seed) {
     double insert_time = std::chrono::duration<double, std::milli>(end_insert - start_insert).count();
 
     auto start_remove = std::chrono::high_resolution_clock::now();
-    _remove_from_list(lst, removal_indices, false);
+    _remove_from_container(lst, removal_indices, false);
     auto end_remove = std::chrono::high_resolution_clock::now();
 
     double remove_time = std::chrono::duration<double, std::milli>(end_remove - start_remove).count();
@@ -248,7 +227,7 @@ std::tuple<double, double> set_insert_remove(int N, unsigned int seed) {
     double insert_time = std::chrono::duration<double, std::milli>(end_insert - start_insert).count();
 
     auto start_remove = std::chrono::high_resolution_clock::now();
-    _remove_from_set(s, removal_indices, false);
+    _remove_from_container(s, removal_indices, false);
     auto end_remove = std::chrono::high_resolution_clock::now();
 
     double remove_time = std::chrono::duration<double, std::milli>(end_remove - start_remove).count();
