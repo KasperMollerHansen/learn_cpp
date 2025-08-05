@@ -27,26 +27,40 @@ int main()
     int N = 5;
     unsigned int seed = 42;
 
-    std::cout << "Testing vector insert/remove:" << std::endl;
-    test_vector_insert_remove(N, seed);
-    std::cout << "Testing list insert/remove:" << std::endl;
-    test_list_insert_remove(N, seed);
-    std::cout << "Testing set insert/remove:" << std::endl;
-    test_set_insert_remove(N, seed);
+    // std::cout << "Testing vector insert/remove:" << std::endl;
+    // test_vector_insert_remove(N, seed);
+    // std::cout << "Testing list insert/remove:" << std::endl;
+    // test_list_insert_remove(N, seed);
+    // std::cout << "Testing set insert/remove:" << std::endl;
+    // test_set_insert_remove(N, seed);
+    // std::cout << "All tests completed." << std::endl;
 
-    std::cout << "All tests completed." << std::endl;
+    std::cout << "Testing vector insert/remove large:" << std::endl;
+    test_vector_insert_remove_large(N, seed);
+    std::cout << "Testing list insert/remove large:" << std::endl;
+    test_list_insert_remove_large(N, seed);
+    std::cout << "Testing set insert/remove large:" << std::endl;
+    test_set_insert_remove_large(N, seed);
+    std::cout << "All large tests completed." << std::endl;
 
     // Benchmarking
     std::cout << "Starting benchmarks..." << std::endl;
     std::vector<int> N_list = {500, 1000, 5000, 10000, 50000};
     std::vector<unsigned int> seed_list = {42, 43, 44, 45, 46};
 
-    std::cout << "Benchmarking vector insert/remove..." << std::endl;
-    benchmark_insert_remove(N_list, seed_list, vector_insert_remove, "../output_data/vector_benchmark.csv");
-    std::cout << "Benchmarking list insert/remove..." << std::endl;
-    benchmark_insert_remove(N_list, seed_list, list_insert_remove, "../output_data/list_benchmark.csv");
-    std::cout << "Benchmarking set insert/remove..." << std::endl;
-    benchmark_insert_remove(N_list, seed_list, set_insert_remove, "../output_data/set_benchmark.csv");
+    // std::cout << "Benchmarking vector insert/remove..." << std::endl;
+    // benchmark_insert_remove(N_list, seed_list, vector_insert_remove, "../output_data/vector_benchmark.csv");
+    // std::cout << "Benchmarking list insert/remove..." << std::endl;
+    // benchmark_insert_remove(N_list, seed_list, list_insert_remove, "../output_data/list_benchmark.csv");
+    // std::cout << "Benchmarking set insert/remove..." << std::endl;
+    // benchmark_insert_remove(N_list, seed_list, set_insert_remove, "../output_data/set_benchmark.csv");
+
+    std::cout << "Benchmarking vector insert/remove large..." << std::endl;
+    benchmark_insert_remove(N_list, seed_list, vector_insert_remove_large, "../output_data/vector_benchmark_large.csv");
+    std::cout << "Benchmarking list insert/remove large..." << std::endl;
+    benchmark_insert_remove(N_list, seed_list, list_insert_remove_large, "../output_data/list_benchmark_large.csv");
+    std::cout << "Benchmarking set insert/remove large..." << std::endl;
+    benchmark_insert_remove(N_list, seed_list, set_insert_remove_large, "../output_data/set_benchmark_large.csv");
 
     return 0;
 
