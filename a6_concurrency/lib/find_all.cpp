@@ -13,7 +13,7 @@ std::pair<std::vector<T*>, double> find_all(std::vector<T>& vec, Pred pred) {
         if (pred(elem)) result.push_back(&elem);
     }
     auto t2 = std::chrono::high_resolution_clock::now();
-    double elapsed = std::chrono::duration<double>(t2-t1).count();
+    double elapsed = std::chrono::duration<double, std::milli>(t2-t1).count();
     return {result, elapsed};
 }
 
@@ -44,7 +44,7 @@ std::pair<std::vector<T*>, double> parallel_find_all(std::vector<T>& vec, Pred p
 
     std::vector<T*> combined;
     for (auto& part : results) combined.insert(combined.end(), part.begin(), part.end());
-    double elapsed = std::chrono::duration<double>(t2-t1).count();
+    double elapsed = std::chrono::duration<double, std::milli>(t2-t1).count();
     return {combined, elapsed};
 }
 
@@ -80,7 +80,7 @@ std::pair<std::vector<T*>, double> parallel_find_all_ready(std::vector<T>& vec, 
 
     std::vector<T*> combined;
     for (auto& part : results) combined.insert(combined.end(), part.begin(), part.end());
-    double elapsed = std::chrono::duration<double>(t2-t1).count();
+    double elapsed = std::chrono::duration<double, std::milli>(t2-t1).count();
     return {combined, elapsed};
 }
 
