@@ -1,9 +1,5 @@
 {
     "files.associations": {
-        "*.tpp": "cpp",
-        "iosfwd": "cpp",
-        "string": "cpp",
-        "chrono": "cpp",
         "cctype": "cpp",
         "clocale": "cpp",
         "cmath": "cpp",
@@ -19,6 +15,7 @@
         "atomic": "cpp",
         "bit": "cpp",
         "bitset": "cpp",
+        "chrono": "cpp",
         "compare": "cpp",
         "complex": "cpp",
         "concepts": "cpp",
@@ -29,6 +26,7 @@
         "list": "cpp",
         "map": "cpp",
         "set": "cpp",
+        "string": "cpp",
         "unordered_map": "cpp",
         "unordered_set": "cpp",
         "vector": "cpp",
@@ -49,6 +47,7 @@
         "utility": "cpp",
         "fstream": "cpp",
         "initializer_list": "cpp",
+        "iosfwd": "cpp",
         "iostream": "cpp",
         "istream": "cpp",
         "limits": "cpp",
