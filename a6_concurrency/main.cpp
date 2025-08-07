@@ -7,6 +7,46 @@
 #include <filesystem>
 #include "include/find_all.hpp"
 
+void small_demo_test() {
+    std::vector<int> data{1,2,3,4,5,6,7,8,9,10};
+
+    auto pred_eq5 = [](int x) { return x == 5; };
+    auto pred_gt5 = [](int x) { return x > 5; };
+
+    std::cout << "Small test: find 5\n";
+    auto [res1, t1] = find_all<int, std::function<bool(int&)>>(data, pred_eq5);
+
+    std::cout << "find_all: ";
+    for (auto* p : res1) std::cout << *p << " ";
+    std::cout << "(time: " << t1 << " ms)\n";
+
+    auto [res2, t2] = parallel_find_all<int, std::function<bool(int&)>>(data, pred_eq5, 2);
+    std::cout << "parallel_find_all: ";
+    for (auto* p : res2) std::cout << *p << " ";
+    std::cout << "(time: " << t2 << " ms)\n";
+
+    auto [res3, t3] = parallel_find_all_ready<int, std::function<bool(int&)>>(data, pred_eq5, 2);
+    std::cout << "parallel_find_all_ready: ";
+    for (auto* p : res3) std::cout << *p << " ";
+    std::cout << "(time: " << t3 << " ms)\n";
+
+    std::cout << "\nSmall test: find >5\n";
+    auto [res4, t4] = find_all<int, std::function<bool(int&)>>(data, pred_gt5);
+    std::cout << "find_all: ";
+    for (auto* p : res4) std::cout << *p << " ";
+    std::cout << "(time: " << t4 << " ms)\n";
+
+    auto [res5, t5] = parallel_find_all<int, std::function<bool(int&)>>(data, pred_gt5, 2);
+    std::cout << "parallel_find_all: ";
+    for (auto* p : res5) std::cout << *p << " ";
+    std::cout << "(time: " << t5 << " ms)\n";
+
+    auto [res6, t6] = parallel_find_all_ready<int, std::function<bool(int&)>>(data, pred_gt5, 2);
+    std::cout << "parallel_find_all_ready: ";
+    for (auto* p : res6) std::cout << *p << " ";
+    std::cout << "(time: " << t6 << " ms)\n\n";
+}
+
 void run_serial_vs_parallel_benchmarks(const std::string& csv_path, std::size_t num_threads) {
     std::ofstream csv(csv_path);
     csv << "N,serial,parallel,parallel_ready\n";
@@ -95,6 +135,9 @@ void run_thread_scaling_benchmarks(const std::string& csv_path, std::size_t N) {
 
 
 int main() {
+    std::cout << "Running small demo test...\n";
+    small_demo_test();
+
     std::filesystem::create_directories("../output_data");
     run_serial_vs_parallel_benchmarks("../output_data/results_serial_vs_parallel.csv", 10);
     run_thread_scaling_benchmarks("../output_data/results_thread_scaling_small.csv", 1'000'000);
