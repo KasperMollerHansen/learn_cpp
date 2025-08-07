@@ -100,9 +100,5 @@ int main() {
     run_thread_scaling_benchmarks("../output_data/results_thread_scaling_small.csv", 1'000'000);
     run_thread_scaling_benchmarks("../output_data/results_thread_scaling_large.csv", 1'000'000'000);
 
-
-    // You can call other test functions here as needed
-    // run_other_benchmark();
-
     return 0;
 }

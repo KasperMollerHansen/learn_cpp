@@ -32,9 +32,9 @@ fig2.add_trace(go.Scatter(x=df_small['threads'], y=df_small['parallel_ready'], m
 fig2.update_layout(
     title="<b>Thread Scaling (Small N)</b><br><span style='font-size:14px'>Mean of 5 runs, N = 1,000,000</span>",
     xaxis_title="<b>Number of Threads</b>",
-    yaxis_title="<b>Time (ms)</b>"
-    # xaxis_type="log",
-    # yaxis_type="log"
+    yaxis_title="<b>Time (ms)</b>",
+    xaxis_type="log",
+    yaxis_type="log"
 )
 fig2.write_image(os.path.join(plot_dir, "thread_scaling_small.png"))
 fig2.show()
@@ -47,9 +47,9 @@ fig3.add_trace(go.Scatter(x=df_large['threads'], y=df_large['parallel_ready'], m
 fig3.update_layout(
     title="<b>Thread Scaling (Large N)</b><br><span style='font-size:14px'>Mean of 5 runs, N = 1,000,000,000</span>",
     xaxis_title="<b>Number of Threads</b>",
-    yaxis_title="<b>Time (ms)</b>"
-    # xaxis_type="log",
-    # yaxis_type="log"
+    yaxis_title="<b>Time (ms)</b>",
+    xaxis_type="log",
+    yaxis_type="log"
 )
 fig3.write_image(os.path.join(plot_dir, "thread_scaling_large.png"))
 fig3.show()
